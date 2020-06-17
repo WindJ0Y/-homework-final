@@ -7,6 +7,9 @@ let config = {
   userLogout: {url: '/user/logout'},
   userInfo: {url: '/user/info'},
 
+  studentHomeworkList: {url: '/student/listhw'},
+  studentHomeworkInfo: {url: '/student/infohw'},
+  studentHomeworkSubmit: {url: '/student/submithw'},
 }
 let API = {}
 

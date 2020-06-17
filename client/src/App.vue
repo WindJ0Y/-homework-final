@@ -30,4 +30,8 @@ export default {
   font-size: larger !important;
 }
 
+.TL{
+  text-align: left;
+}
+
 </style>

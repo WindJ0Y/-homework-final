@@ -52,11 +52,14 @@
 </template>
 
 <script>
+import API from '@/util/API.js';
+
 export default {
   name: 'HomeworkList',
   props: ['uid','token','role'],
   data(){
     return {
+      infoList: [],
       /*
       infoList: [
         {
@@ -82,6 +85,7 @@ export default {
         },
       ]
       */
+      /*
       infoList: [
         {
           id: 1,
@@ -108,6 +112,7 @@ export default {
           content: "aaaaaaaaa",
         },
       ]
+      */
     }
   },
   created: function() {
@@ -118,8 +123,30 @@ export default {
       this.$emit('selectFunc',id);
     },
     reload: function(){
-      console.log(this.role);
-    }
+      if(this.role == "student"){
+        this.loadStudent();
+      }else if(this.role == "teacher"){
+
+      }else{
+        console.log("ERR");
+      }
+    },
+    loadStudent: function(){
+      let pform = {
+        uid: this.uid,
+        token: this.token,
+      };
+      
+      API.studentHomeworkList(pform).then(res => {
+        if(res.state == 0){
+          this.infoList = res.list.reverse();
+        }else{
+          alert(res.msg);
+        }
+      }).catch(msg => {
+        alert(msg);
+      });
+    },
   }
 }
 </script>

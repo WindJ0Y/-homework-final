@@ -19,6 +19,11 @@
 
     </el-container>
 
+    <InfoCover
+      :dialogVisible.sync = "divShow" @onClose="elmClose"
+      :uid="uid" :token="token" :hid="viewHid"
+    />
+
   </div>
 </template>
 
@@ -26,18 +31,22 @@
 
 import RouterBar from '@/components/RouterBar.vue'
 import HomeworkList from '@/components/HomeworkList.vue'
+import InfoCover from '@/components/student/InfoCover.vue'
 import API from '@/util/API.js';
 
 export default {
   name: 'Student',
   components: {
-    RouterBar, HomeworkList
+    RouterBar, HomeworkList, InfoCover
   },
   data() {
     return {
       uid: this.$cookie.get("uid"),
       token: this.$cookie.get("token"),
       username: "",
+
+      viewHid: -1,
+      divShow: false,
     }
   },
   created: function() {
@@ -62,8 +71,14 @@ export default {
       });
     },
     elmClick: function(hid){
-      console.log("RCV" + hid);
+      console.log(this.divShow);
+      this.viewHid = hid;
+      this.divShow = true;
     },
+    elmClose: function(){
+      //this.viewHid = -1;
+      this.divShow = false;
+    }
   }
 }
 </script>
