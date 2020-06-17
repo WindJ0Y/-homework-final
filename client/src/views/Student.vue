@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div style="height: 100%">
     
-    <el-container>
+    <el-container style="height: 100%">
 
       <el-header>
         <RouterBar
@@ -10,7 +10,11 @@
       </el-header>
 
       <el-main>
-        {{"Student"}}
+
+        <HomeworkList
+          :uid="uid" :token="token" role="student" @selectFunc="elmClick"
+        />
+        
       </el-main>
 
     </el-container>
@@ -21,12 +25,13 @@
 <script>
 
 import RouterBar from '@/components/RouterBar.vue'
+import HomeworkList from '@/components/HomeworkList.vue'
 import API from '@/util/API.js';
 
 export default {
   name: 'Student',
   components: {
-    RouterBar
+    RouterBar, HomeworkList
   },
   data() {
     return {
@@ -55,8 +60,10 @@ export default {
       }).catch(msg => {
           alert(msg);
       });
-      
-    }
+    },
+    elmClick: function(hid){
+      console.log("RCV" + hid);
+    },
   }
 }
 </script>

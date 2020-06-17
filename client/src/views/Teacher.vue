@@ -10,7 +10,9 @@
       </el-header>
 
       <el-main>
-        {{"Teacher"}}
+        <HomeworkList
+          :uid="uid" :token="token" role="teacher" @selectFunc="elmClick"
+        />
       </el-main>
 
     </el-container>
@@ -21,12 +23,13 @@
 <script>
 
 import RouterBar from '@/components/RouterBar.vue'
+import HomeworkList from '@/components/HomeworkList.vue'
 import API from '@/util/API.js';
 
 export default {
   name: 'Teacher',
   components: {
-    RouterBar
+    RouterBar, HomeworkList
   },
   data() {
     return {
@@ -56,7 +59,14 @@ export default {
           alert(msg);
       });
       
+    },
+    elmClick: function(id){
+      console.log("CL" + id);
+    },
+    elmDel: function(id){
+      console.log("DEl" + id);
     }
-  }
+  },
+  
 }
 </script>
