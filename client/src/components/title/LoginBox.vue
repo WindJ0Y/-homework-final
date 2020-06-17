@@ -8,10 +8,16 @@
         </el-form-item>
         <el-form-item label="密码" prop="password">
           <el-input type="password" placeholder="请输入密码" v-model="form.password"/>
+        </el-form-item> 
+        <el-form-item label="身份" prop="job">
+          <el-select placeholder="请选择身份" v-model="form.job" style="width: 380px">
+            <el-option label="学生" value="student"></el-option>
+            <el-option label="教师" value="teacher"></el-option>
+          </el-select>
         </el-form-item>
         
-        <el-button type="primary" v-on:click=";">登录</el-button>
-        <el-button v-on:click=";">注册</el-button>
+        <el-button type="primary" v-on:click="onLogin()">登录</el-button>
+        <el-button v-on:click="onReg()">注册</el-button>
         
       </el-form>
     </div>
@@ -19,6 +25,7 @@
 </template>
 
 <script>
+import API from '@/util/API.js';
 
 export default {
   name: 'LoginBox',
@@ -27,7 +34,8 @@ export default {
     return {
       form: {
         username: '',
-        password: ''
+        password: '',
+        job:''
       },
 
       rules: {
@@ -36,12 +44,40 @@ export default {
         ],
         password: [
           {required: true, message: '密码不可为空', trigger: 'blur'}
+        ],
+        job: [
+          {required: true, message: '身份不可为空', trigger: 'blur'}
         ]
       },
     }
   },
-  methods: {}
+  methods: {
+    onLogin: function(){
+      this.$refs.loginForm.validate((valid) => {
+        if (valid) {
+          console.log(this.form);
+          API.userLogin(this.form).then(res1 => {
+            if (res1.state === 0) {
+                this.$cookie.set("uid", res1.uid);
+                this.$cookie.set("token", res1.token);
+                this.$cookie.set("job", res1.job);
+            } else {
+                alert("登录失败");
+            }
+          }).catch(msg => {
+              alert(msg);
+          });
+        } else {
+          console.log(false);
+        }
+      });
+    },
+    onReg: function(){
+      this.$router.push({path:'/register'});
+    }
+  }
 }
+
 </script>
 
 <style scoped>
