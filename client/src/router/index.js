@@ -6,6 +6,7 @@ import Register from '../views/Register.vue'
 import Student from '../views/Student.vue'
 import Teacher from '../views/Teacher.vue'
 import SubmitList from '../views/SubmitList.vue'
+import Logout from '../views/Logout.vue'
 
 Vue.use(VueRouter)
 
@@ -27,24 +28,34 @@ Vue.use(VueRouter)
   },
   {
     path: '/login',
-    component: Login
+    component: Login,
+    meta:{title:'登录页'},
+  },
+  {
+    path: '/logout',
+    component: Logout,
+    meta:{title:'登出中...'},
   },
   {
     path: '/register',
-    component: Register
+    component: Register,
+    meta:{title:'注册页'},
   },
   {
     path: '/student',
-    component: Student
+    component: Student,
+    meta:{title:'学生页'},
   },
   {
     path: '/teacher',
-    component: Teacher
+    component: Teacher,
+    meta:{title:'教师页'},
   },
 
   {
     path: '/teacher/submits',
-    component: SubmitList
+    component: SubmitList,
+    meta:{title:'作业提交列表'},
   },
 ]
 

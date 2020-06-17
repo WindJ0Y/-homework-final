@@ -15,9 +15,20 @@ public interface UserMapper {
             "where nickname = #{username} and password = #{password} and role = #{role}")
     DBuser_reg getRegByAll(String username,String password,int role);
 
+    @Select("select * from user_reg " +
+            "where uid = #{uid} ")
+    DBuser_reg getRegByID(int uid);
+
     @Insert("insert into user_login " +
             "values (#{uid},#{token}) " +
             "ON DUPLICATE KEY UPDATE token = #{token}")
     void updateToken(int uid,String token);
 
+    @Select("select count(*) from user_login " +
+            "where uid = #{uid} and token = #{token}")
+    int checkUser(int uid,String token);
+
+    @Select("select role from user_reg " +
+            "where uid = #{uid}")
+    int getRole(int uid);
 }

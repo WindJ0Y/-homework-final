@@ -16,4 +16,22 @@ public class UserResponses {
         String token;
     }
 
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class LogoutResponse {
+        int state;
+        String msg;
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class InfoResponse {
+        int state;
+        String msg;
+        int role;
+        String username;
+    }
+
 }

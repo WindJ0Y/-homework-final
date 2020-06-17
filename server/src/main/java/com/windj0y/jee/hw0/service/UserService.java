@@ -15,6 +15,16 @@ public class UserService {
     @Autowired
     private UserMapper userDao;
 
+    public boolean checkUser(int uid, String token) {
+        if(token.isEmpty())return false;
+        return userDao.checkUser(uid, token) == 1;
+    }
+
+    public int getRole(int uid, String token) {
+        if(! checkUser(uid, token)) return -1;
+        return userDao.getRole(uid);
+    }
+
     public LoginResponse login(String username, String password, int role){
         DBuser_reg info = userDao.getRegByAll(username,password,role);
         if(info == null){
@@ -23,6 +33,16 @@ public class UserService {
         String token = StringUtil.getRandString(32);
         userDao.updateToken(info.getUid(),token);
         return new LoginResponse(0,"登陆成功",info.getUid(),token);
+    }
+
+    public LogoutResponse logout(int uid){
+        userDao.updateToken(uid,"");
+        return new LogoutResponse(0,"登出成功");
+    }
+
+    public InfoResponse info(int uid){
+        DBuser_reg info = userDao.getRegByID(uid);
+        return new InfoResponse(0,"成功",info.getRole(),info.getNickname());
     }
 
 }

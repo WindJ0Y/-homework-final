@@ -28,4 +28,26 @@ public class UserController {
         return userService.login(req.getUsername(),req.getPassword(),req.getRole());
     }
 
+    @RequestMapping("/logout")
+    public LogoutResponse login(@Valid LogoutRequest req, BindingResult br) {
+        if(br.hasErrors()){
+            return new LogoutResponse(-10,"参数错误");
+        }
+        if(! userService.checkUser(req.getUid(),req.getToken())){
+            return new LogoutResponse(-1,"身份验证错误");
+        }
+        return userService.logout(req.getUid());
+    }
+
+    @RequestMapping("/info")
+    public InfoResponse login(@Valid InfoRequest req, BindingResult br) {
+        if(br.hasErrors()){
+            return new InfoResponse(-10,"参数错误",-1,"");
+        }
+        if(! userService.checkUser(req.getUid(),req.getToken())){
+            return new InfoResponse(-1,"身份验证错误",-1,"");
+        }
+        return userService.info(req.getUid());
+    }
+
 }

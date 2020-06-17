@@ -60,15 +60,19 @@ export default {
             password: this.form.password,
             role: (this.form.job == "student" ? 0 : 1),
           };
-          console.log(pform);
           
           API.userLogin(pform).then(res1 => {
             if (res1.state === 0) {
                 this.$cookie.set("uid", res1.uid);
                 this.$cookie.set("token", res1.token);
-                this.$cookie.set("role", pform.role);
+                if(pform.role == 0){
+                  this.$router.push({path:'/student'});
+                }else{
+                  this.$router.push({path:'/teacher'});
+                }
             } else {
-                alert("登录失败");
+                this.$message.error(res1.msg);
+                console.log(res1);
             }
           }).catch(msg => {
               alert(msg);
