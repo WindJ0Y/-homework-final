@@ -55,18 +55,26 @@ export default {
     onLogin: function(){
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
-          console.log(this.form);
-          API.userLogin(this.form).then(res1 => {
+          let pform = {
+            username: this.form.username,
+            password: this.form.password,
+            role: (this.form.job == "student" ? 0 : 1),
+          };
+          console.log(pform);
+          
+          API.userLogin(pform).then(res1 => {
             if (res1.state === 0) {
                 this.$cookie.set("uid", res1.uid);
                 this.$cookie.set("token", res1.token);
-                this.$cookie.set("job", res1.job);
+                this.$cookie.set("role", pform.role);
             } else {
                 alert("登录失败");
             }
           }).catch(msg => {
               alert(msg);
           });
+          
+
         } else {
           console.log(false);
         }

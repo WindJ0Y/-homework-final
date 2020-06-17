@@ -2,9 +2,8 @@ import axios from 'axios'
 import qs from 'qs'
 
 let config = {
-	baseURL: 'http://39.106.160.119:8080',
-	method: 'post',
-	userLogin: {url: '/uesr/login'},
+	baseURL: 'http://127.0.0.1:8848',
+	userLogin: {url: '/user/login'},
 }
 let API = {}
 
@@ -15,12 +14,11 @@ for (var elm in config) {
       return new Promise((resolve) => {
 
         let apiInfo = innerConfig[api]
-        let method = apiInfo.method || innerConfig.method
 
         let config = {
           baseURL: innerConfig.baseURL,
           url: apiInfo.url,
-          method: method,
+          method: "post",
           data: qs.stringify(data),
         }
 
@@ -45,6 +43,8 @@ for (var elm in config) {
             console.log(apiData.data)
           } catch (err){/**/}
         }).catch()
+
+
       })
     }
   })(config,elm)
