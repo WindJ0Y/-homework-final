@@ -31,4 +31,12 @@ public interface UserMapper {
     @Select("select role from user_reg " +
             "where uid = #{uid}")
     int getRole(int uid);
+
+    @Select("select count(*) from user_reg " +
+            "where nickname = #{username}")
+    int getUserByUsername(String username);
+
+    @Insert("insert into user_reg(nickname,password,role) " +
+            "values (#{username},#{password},#{role})")
+    void doReg(String username, String password, int role);
 }

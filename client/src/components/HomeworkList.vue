@@ -31,11 +31,11 @@
           <div v-if="role == 'teacher'">
             <el-tag class = "myCardHeaderRight">
               <i class="el-icon-circle-check"></i>
-              批阅({{elm.readcnt}}/{{elm.total}}})
+              批阅({{elm.readcnt}}/{{elm.total}})
             </el-tag>
             <el-tag class = "myCardHeaderRight">
               <i class="el-icon-circle-check"></i>
-              提交({{elm.submitcnt}}/{{elm.total}}})
+              提交({{elm.submitcnt}}/{{elm.total}})
             </el-tag>
           </div>
 
@@ -126,7 +126,7 @@ export default {
       if(this.role == "student"){
         this.loadStudent();
       }else if(this.role == "teacher"){
-
+        this.loadTeacher();
       }else{
         console.log("ERR");
       }
@@ -138,6 +138,22 @@ export default {
       };
       
       API.studentHomeworkList(pform).then(res => {
+        if(res.state == 0){
+          this.infoList = res.list.reverse();
+        }else{
+          alert(res.msg);
+        }
+      }).catch(msg => {
+        alert(msg);
+      });
+    },
+    loadTeacher: function(){
+      let pform = {
+        uid: this.uid,
+        token: this.token,
+      };
+      
+      API.teacherHomeworkList(pform).then(res => {
         if(res.state == 0){
           this.infoList = res.list.reverse();
         }else{

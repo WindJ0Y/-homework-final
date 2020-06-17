@@ -6,10 +6,17 @@ let config = {
 	userLogin: {url: '/user/login'},
   userLogout: {url: '/user/logout'},
   userInfo: {url: '/user/info'},
+  userReg: {url: '/user/register'},
 
   studentHomeworkList: {url: '/student/listhw'},
   studentHomeworkInfo: {url: '/student/infohw'},
   studentHomeworkSubmit: {url: '/student/submithw'},
+
+  teacherHomeworkList: {url: '/teacher/listhw'},
+  teacherHomeworkInfo: {url: '/teacher/infohw'},
+  teacherHomeworkSubmit: {url: '/teacher/submithw'},
+
+  teacherHomeworkAdd: {url: '/teacher/add'},
 }
 let API = {}
 

@@ -50,4 +50,12 @@ public class UserController {
         return userService.info(req.getUid());
     }
 
+    @RequestMapping("/register")
+    public RegResponse login(@Valid RegRequest req, BindingResult br) {
+        if(br.hasErrors()){
+            return new RegResponse(-10,"参数错误");
+        }
+        return userService.register(req.getUsername(),req.getPassword(),req.getRole());
+    }
+
 }

@@ -45,4 +45,12 @@ public class UserService {
         return new InfoResponse(0,"成功",info.getRole(),info.getNickname());
     }
 
+    public RegResponse register(String username, String password, int role) {
+        int cnt = userDao.getUserByUsername(username);
+        if(cnt != 0){
+            return new RegResponse(-1,"有重名");
+        }
+        userDao.doReg(username,password,role);
+        return new RegResponse(0,"成功");
+    }
 }

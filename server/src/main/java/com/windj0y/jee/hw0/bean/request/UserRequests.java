@@ -38,4 +38,13 @@ public class UserRequests {
         @NotNull String token;
     }
 
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class RegRequest {
+        @NotNull String username;
+        @NotNull String password;
+        @NotNull int role;
+    }
+
 }

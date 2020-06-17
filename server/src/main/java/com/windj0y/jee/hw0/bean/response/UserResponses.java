@@ -34,4 +34,11 @@ public class UserResponses {
         String username;
     }
 
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class RegResponse {
+        int state;
+        String msg;
+    }
 }

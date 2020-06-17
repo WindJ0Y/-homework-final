@@ -59,4 +59,12 @@ public class TeacherResponses {
         String msg;
     }
 
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class AddHomeworkResponse {
+        int state;
+        String msg;
+    }
+
 }

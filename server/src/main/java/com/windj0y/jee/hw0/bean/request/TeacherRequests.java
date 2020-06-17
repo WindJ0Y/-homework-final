@@ -35,4 +35,14 @@ public class TeacherRequests {
         @NotNull String content;
     }
 
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class AddHomeworkRequest implements Authentication {
+        @NotNull int uid;
+        @NotNull String token;
+        @NotNull String title;
+        @NotNull String content;
+    }
+
 }
