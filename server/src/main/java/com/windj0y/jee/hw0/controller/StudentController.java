@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 @CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/student")
+@RequestMapping("/api/v1/student")
 public class StudentController {
 
     @Autowired

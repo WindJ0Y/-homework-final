@@ -1,14 +1,11 @@
 <template>
   <div>
+    <div class="backPic"></div>
     
     <el-container>
 
-      <el-header>
-        <RouterBar/>
-      </el-header>
-
       <el-main>
-        {{"Register"}}
+          <RegisterBox/>
       </el-main>
 
     </el-container>
@@ -18,12 +15,31 @@
 
 <script>
 
-import RouterBar from '@/components/RouterBar.vue'
+import RegisterBox from '@/components/register/RegisterBox.vue'
 
 export default {
   name: 'Register',
-  components: {
-    RouterBar
+  components: { RegisterBox },
+  data() {
+    return {
+      
+    }
+  },
+  methods: {
   }
 }
 </script>
+
+<style scoped>
+
+  .backPic {
+    background-image: linear-gradient(to right , #7A88FF, #7AFFAF);
+    height: 100%;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1
+  }
+
+</style>

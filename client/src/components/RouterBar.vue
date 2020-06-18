@@ -6,6 +6,10 @@
         <a class="LF">作业管理平台V0.1</a>
       </el-menu-item>
       <el-menu-item index="1" class="LF">作业中心</el-menu-item>
+      <el-menu-item class="LF" v-if="role =='teacher'" @click="addClick">
+        <i class="el-icon-plus"></i>
+        <a class="LF">添加作业</a>
+      </el-menu-item>
       <el-submenu index="2" style="float: right">
         <template slot="title" >
           <i class="el-icon-user"></i>
@@ -20,7 +24,7 @@
 <script>
 export default {
   name: 'RouterBar',
-  props: ['username'],
+  props: ['username','role','doAdd'],
   data(){
     return {
       //username: "666",
@@ -33,6 +37,9 @@ export default {
           this.$router.push({path:'/logout'});
         })
         .catch( _ => {});
+    },
+    addClick: function(){
+      this.$emit('doAdd');
     }
   }
 }
